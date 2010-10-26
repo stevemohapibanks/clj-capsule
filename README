@@ -1,0 +1,17 @@
+# clj-capsule
+
+A Clojure client library to talk to the CapsuleCRM API
+
+## Installation
+
+Use Leiningen, and add the following to your project.clj file
+
+[clj-capsule "0.0.1"]
+
+Then run lein deps to pull the JAR file from Clojars.
+
+## License
+
+Copyright (C) 2010 Steven Mohapi-Banks
+
+Distributed under the Eclipse Public License, the same as Clojure.
