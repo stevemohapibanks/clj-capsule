@@ -38,12 +38,15 @@
 			(is (= expected-person (get-party "1"))))
 		(set-auth-details nil nil)))
 
-; (deftest test-search
-; 	(let [session (make-session "account-name" "token")
-; 				expected-options {:basic-auth ["token" "x"] :content-type :json :accept :json}
-; 				expected-response "<tag>some data</tag>"]
-; 		(expect [client/get
-; 							(has-args ["https://account-name.capsulecrm.com/api/party"
-; 								 				 {:query-params {"q" "This is my query"} :basic-auth ["token" "x"], :content-type :json, :accept :json}]
-; 								(returns expected-response))]
-; 			(is (= expected-response (search session "This is my query"))))))
+(deftest test-search
+	(let [expected-options {:basic-auth ["token" "x"] :content-type :json :accept :json}]
+
+		(set-auth-details "account-name" "token")
+
+		(expect [client/get
+							(has-args ["https://account-name.capsulecrm.com/api/party"
+								 				 {:query-params {"q" "This is my query"} :basic-auth ["token" "x"], :content-type :json, :accept :json}]
+								(returns mock-search-response))]
+			(is (= expected-search (search "This is my query"))))
+			
+		(set-auth-details nil nil)))
