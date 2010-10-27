@@ -17,7 +17,9 @@
 								(has-args ["https://account-name.capsulecrm.com/api/party" expected-options]
 									(returns mock-parties-response))]
 				(is (= expected-parties (get-parties)))
-				(is (= 3 (count (get-parties))))))
+				(is (map? (:person (get-parties))))
+				(is (vector? (:organisation (get-parties))))
+				(is (= 2 (count (:organisation (get-parties)))))))
 
 		(testing "with range limits set"
 			(expect [client/get 
