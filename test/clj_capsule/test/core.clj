@@ -6,6 +6,6 @@
 
 (deftest test-with-query-params
 	(binding [*connection* {:url "http://account-name.capsulecrm.com/api"
-													:options {:content-type "application/json"}}]
-		(with-query-params {:q "a query"}
-			(is (= (:options *connection*) {:content-type "application/json" :query-params {:q "a query"}})))))
+                          :options {:content-type "application/json"}}]
+    (with-query-params {:q "a query"}
+      (is (= (:options *connection*) {:content-type "application/json" :query-params {:q "a query"}})))))

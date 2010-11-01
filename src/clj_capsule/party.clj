@@ -27,7 +27,7 @@
 (defn search
 	[query]
 	(with-connection-to "party"
-		(with-query-params {"q" query}
+		(with-query-params {"q"	 query}
 			(let [response (client/get (:url *connection*) (:options *connection*))]
 				(-> response :body read-json :parties)))))
 	
