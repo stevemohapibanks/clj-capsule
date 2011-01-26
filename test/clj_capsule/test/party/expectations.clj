@@ -1,15 +1,18 @@
 (ns clj-capsule.test.party.expectations
-  (:use clj-capsule.contact
-        clj-capsule.party))
-
+  (:use clj-capsule.party))
 
 ;
 ; Mocked JSON response and clojure data structure for get-parties
 ;
 (def mock-parties-response
   {:status 200, 
-    :headers {"date" "Tue, 26 Oct 2010 21:36:40 GMT", "server" "Apache", "set-cookie" "JSESSIONID=F822633D4FCC27735E6A259D6C1AB248.node1; Path=/; Secure", "connection" "close", "transfer-encoding" "chunked", "content-type" "application/json"}
-    :body "{\"parties\":
+   :headers {"date" "Tue, 26 Oct 2010 21:36:40 GMT"
+             "server" "Apache"
+             "set-cookie" "JSESSIONID=F822633D4FCC27735E6A259D6C1AB248.node1; Path=/; Secure"
+             "connection" "close"
+             "transfer-encoding" "chunked"
+             "content-type" "application/json"}
+   :body "{\"parties\":
             {
               \"person\":{
                 \"id\":\"1\",
@@ -92,7 +95,7 @@
                   \"contacts\":\"\",
                   \"name\":\"Google\"}]}}"})
 
-(def expected-search
+(def expected-raw-search
   {:person {
       :id "1"
       :contacts {
@@ -104,4 +107,17 @@
    :organisation [
       {:id "2" :contacts "" :name "Scotland Yard"}
       {:id "3" :contacts "" :name "Google"}
-    ]})
+      ]})
+
+
+(def expected-search
+  [{  :id "1"
+      :type "person"
+      :contacts {
+        :email [
+          {:id "10" :emailAddress "s.holmes@home.com"}
+          {:id "11" :emailAddress "s.holmes@work.com"}]}
+      :firstName "Sherlock"
+      :lastName "Holmes"}
+    {:id "2" :type "organisation" :contacts "" :name "Scotland Yard"}
+    {:id "3" :type "organisation" :contacts "" :name "Google"}])
